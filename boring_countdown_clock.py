@@ -19,7 +19,11 @@ class countdown_timer(object):
         self.set_remaining_time_str()
 
     def set_remaining_time_str(self):
-        time_str = '{hours:02d}:{minutes:02d}:{seconds:02d}'.format(**self.remaining_time)
+        if self.remaining_time['hours'] > 0:
+            time_str = '{hours:02d}:{minutes:02d}:{seconds:02d}'.format(
+                                                                 **self.remaining_time)
+        else:
+            time_str = '{minutes:02d}:{seconds:02d}'.format(**self.remaining_time)
         if time_str != self.remaining_time_str:
             self.updated = True
         else:
@@ -45,15 +49,13 @@ class countdown_timer(object):
         return [self.remaining_time_str, self.remaining_time, self.updated]    
         
        
-def tick():
-    # get the current local time from the PC
+def tictoc():
+    # get the remaining time string
     time_str, time_dict, updated = countdown.get_remaining_time()
-    # if time string has changed, update it
+    # change display every 200 miliseconds if time string was updated
     if updated:
         clock.config(text=time_str)
-    # calls itself every 200 milliseconds
-    # to update the time display as needed
-    clock.after(200, tick)
+    clock.after(200, tictoc)
 
 
 if __name__ == '__main__':
@@ -93,5 +95,5 @@ if __name__ == '__main__':
     countdown = countdown_timer(args.hours, args.minutes, args.seconds)
 
 
-    tick()
+    tictoc()
     root.mainloop()
