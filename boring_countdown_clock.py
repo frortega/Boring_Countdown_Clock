@@ -56,32 +56,42 @@ def tick():
     clock.after(200, tick)
 
 
+if __name__ == '__main__':
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='A basic and boring countdown clock.')
+    parser.add_argument('-H', action = 'store', default = 0, type = int, required = False,
+                        dest = 'hours', help='define hours for countdown (default: 0)')
+    parser.add_argument('-M', action = 'store', default = 15, type = int, 
+                        required = False, dest = 'minutes', 
+                        help='define minutes for countdown (default: 15)')
+    parser.add_argument('-S', action = 'store', default = 0, type = int, required = False,
+                        dest = 'seconds', 
+                        help='define seconds for countdown (default: 0)')
+    parser.add_argument('--tcolor', action = 'store', default = 'white', type = str, 
+                        required = False, dest = 'text_color',
+                        help='define Tk color numbers (default: white)')
+    parser.add_argument('--bcolor', action = 'store', default = 'black', type = str, 
+                        required = False, dest = 'background_color', 
+                        help='define Tk background color (default: black)')
+    parser.add_argument('--font', action = 'store', default = 'courier', type = str,
+                        required = False, dest = 'font',
+                        help='define font type of clock numbers (default: courier)')
+    parser.add_argument('--font_size', action = 'store', default = 160, type = int,
+                        required = False, dest = 'font_size',
+                        help='define font type size of clock numbers (default: 160)')
+    parser.add_argument('--font_style', action = 'store', default = 'bold', type = str,
+                        required = False, dest = 'font_style',
+                        help='define font type style of clock numbers (default: bold)')
+    args = parser.parse_args()
 
-parser = argparse.ArgumentParser(description='A basic and boring countdown clock.')
-parser.add_argument('-H', action = 'store', default = 0, type = int, required = False,
-                    dest = 'hours', help='define hours for countdown (default: 0)')
-parser.add_argument('-M', action = 'store', default = 15, type = int, required = False,
-                    dest = 'minutes', help='define minutes for countdown (default: 15)')
-parser.add_argument('-S', action = 'store', default = 0, type = int, required = False,
-                    dest = 'seconds', help='define seconds for countdown (default: 0)')
-parser.add_argument('--tcolor', action = 'store', default = 'white', type = str, 
-                    required = False,
-                    dest = 'text_color', help='define Tk color numbers (default: white)')
-parser.add_argument('--bcolor', action = 'store', default = 'black', type = str, 
-                    required = False, dest = 'background_color', 
-                    help='define Tk background color (default: black)')
-args = parser.parse_args()
-
-root = tk.Tk()
-root.title("Boring Countdown Clock (http://www.github.com/frortega)")
-clock = tk.Label(root, font=('courier', 160, 'bold'), bg=args.background_color,
-                                                      fg=args.text_color)
-clock.pack(fill='both', expand=100)
-deltaHH = args.hours
-deltaMM = args.minutes
-deltaSS = args.seconds
-countdown = countdown_timer(deltaHH, deltaMM, deltaSS)
+    # initialize basic GUI
+    root = tk.Tk()
+    root.title("Boring Countdown Clock (http://www.github.com/frortega)")
+    font = (args.font, args.font_size, args.font_style)
+    clock = tk.Label(root, font= font, bg=args.background_color, fg=args.text_color)
+    clock.pack(fill='both', expand=100)
+    countdown = countdown_timer(args.hours, args.minutes, args.seconds)
 
 
-tick()
-root.mainloop()
+    tick()
+    root.mainloop()
