@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+"""
+Prof. Francisco Hernan Ortega Culaciati
+ortega.francisco@uchile.cl
+Departamento de Geofisica - FCFM
+Universidad de Chile
+
+April 25, 2020
+
+"""
 import sys, argparse
 if sys.version_info.major == 2: # Python 2
     import Tkinter as tk
