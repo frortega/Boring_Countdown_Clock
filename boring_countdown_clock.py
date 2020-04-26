@@ -61,7 +61,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='A basic and boring countdown clock.')
     parser.add_argument('-H', action = 'store', default = 0, type = int, required = False,
                         dest = 'hours', help='define hours for countdown (default: 0)')
-    parser.add_argument('-M', action = 'store', default = 15, type = int, 
+    parser.add_argument('-M', action = 'store', default = 10, type = int, 
                         required = False, dest = 'minutes', 
                         help='define minutes for countdown (default: 10)')
     parser.add_argument('-S', action = 'store', default = 0, type = int, required = False,
