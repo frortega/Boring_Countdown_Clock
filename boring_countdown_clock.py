@@ -63,7 +63,7 @@ if __name__ == '__main__':
                         dest = 'hours', help='define hours for countdown (default: 0)')
     parser.add_argument('-M', action = 'store', default = 15, type = int, 
                         required = False, dest = 'minutes', 
-                        help='define minutes for countdown (default: 15)')
+                        help='define minutes for countdown (default: 10)')
     parser.add_argument('-S', action = 'store', default = 0, type = int, required = False,
                         dest = 'seconds', 
                         help='define seconds for countdown (default: 0)')
