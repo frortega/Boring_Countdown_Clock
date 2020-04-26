@@ -19,9 +19,13 @@ else:
 import datetime
 
 class countdown_timer(object):
-    def __init__(self, HH, MM, SS, song_filename = 'tunes/bella_ciao.ogg'):
+    def __init__(self, HH, MM, SS, song_filename = 'tunes/during.ogg',
+                 finish_sound_filename = 'tunes/finish.ogg'):
         self.song_filename = song_filename
         self.song = None
+        self.finish_sound_filename = finish_sound_filename
+        self.finish_sound = None
+        self.playing = False
         if song_filename is not None:
             self.init_sound_device()
         self.remaining_time = {'hours':int(HH), 'minutes':int(MM), 'seconds':int(SS)}
@@ -70,6 +74,7 @@ class countdown_timer(object):
             pygame.init()
             pygame.mixer.init()
             self.song = pygame.mixer.Sound(self.song_filename)
+            self.finish_sound = pygame.mixer.Sound(self.finish_sound_filename)
         except ImportError:
             msg = '\n****************************************************\n'
             msg += 'To listen the final tune you need to install pygame.\n'
@@ -80,24 +85,39 @@ class countdown_timer(object):
 
     def play_song(self):
         if self.song is not None:
-            self.song.play()
+            if not self.playing:
+                self.playing = True
+                self.song.play()
         else:
-            msg = '\n****************************************************\n'
-            msg += 'To listen the final tune you need to install pygame.\n'
-            msg += 'Use pip install pygame .\n'
-            msg += '****************************************************\n'
-            print(msg)
+            print('No song defined.')
+    def stop_song(self):
+        if self.song is not None:
+            if self.playing:
+                self.playing = False
+                self.song.stop()
+        else:
+            print('No song defined.')
+    def play_finish(self):
+        if self.finish_sound is not None:
+            if not self.playing:
+                self.finish_sound.play(3)
+                self.playing = True
+        else:
+            print('No song defined.')
+
        
 def tictoc():
     # get the remaining time string
     time_str, time_dict, updated = countdown.get_remaining_time()
+    countdown.play_song()
     # change display every 200 miliseconds if time string was updated
     if updated:
         clock.config(text=time_str)
     if not countdown.finished:
         clock.after(200, tictoc)
     else:
-        countdown.play_song()
+        countdown.stop_song()
+        countdown.play_finish()
 
 
 if __name__ == '__main__':
@@ -127,8 +147,8 @@ if __name__ == '__main__':
                         required = False, dest = 'font_style',
                         help='define font type style of clock numbers (default: bold)')
     args = parser.parse_args()
-    print(args)
-    print(sys.argv)
+
+    # add rule for default 
     if '-S' in sys.argv:
         if '-M' not in sys.argv:
             # if seconds are given but not minutes explicitly with -M set default
@@ -141,7 +161,6 @@ if __name__ == '__main__':
     clock = tk.Label(root, font= font, bg=args.background_color, fg=args.text_color)
     clock.pack(fill='both', expand=100)
     countdown = countdown_timer(args.hours, args.minutes, args.seconds)
-
 
     tictoc()
     root.mainloop()
