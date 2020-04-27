@@ -1,4 +1,4 @@
-#!/usr/bin/env pythonw
+#!/usr/bin/env python
 """
 Prof. Francisco Hernan Ortega Culaciati
 ortega.francisco@uchile.cl
@@ -157,8 +157,6 @@ class countdown_timer(object):
             if not self.playing:
                 self.finish_sound.play(3)
                 self.playing = True
-        else:
-            print('No song defined.')
 
        
 def tictoc():
@@ -214,6 +212,14 @@ def button_action():
     if not countdown.started:
         countdown.start()
         start_button.config(text = 'EXIT', command = root.destroy)
+        music_button['state'] = tk.NORMAL
+        Hplus['state'] = tk.DISABLED
+        Hminus['state'] = tk.DISABLED
+        Mplus['state'] = tk.DISABLED
+        Mminus['state'] = tk.DISABLED
+        Splus['state'] = tk.DISABLED
+        Sminus['state'] = tk.DISABLED
+
         
 def button_song():
     if countdown.playing:
@@ -275,6 +281,7 @@ if __name__ == '__main__':
     if args.play_song:
         music_button = tk.Button(root, text='TURN MUSIC OFF', command=button_song)
         music_button.pack(side = tk.RIGHT)
+        music_button['state'] = tk.DISABLED
     # buttons to setup time
     Hplus = tk.Button(root, text='+H', command=button_add_hour)
     Hplus.pack(side = tk.LEFT)
