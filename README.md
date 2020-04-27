@@ -7,6 +7,11 @@ The countdown clock can be called from command line.
 
 Use python3 boring_countdown_clock.py -h for help.
 
-If you install pygame (e.g., pip install pygame) you can have access to a song I embedded in the code and a Robin chirp at the end of the countdown. You can disable the song at any time at the graphical interface or you can launch with option --no_song.
+If you install pygame (e.g., pip install pygame) you can have access to a song I embedded in the code and a Robin chirp at the end of the countdown. You can disable the song at any time at the graphical interface or you can launch with option --no_song. As I started writing this code by April 25, 2020, the only song that can be played is "Bella Ciao". Soon there will be more embedded songs and the ability to add your own songs.
+
+Francisco Ortega Culaciati
+ortega.francisco@uchile.cl
+Department of Geophysics
+University of Chile
 
 
