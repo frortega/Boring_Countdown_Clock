@@ -9,6 +9,11 @@ Use python3 boring_countdown_clock.py -h for help.
 
 If you install pygame (e.g., pip install pygame) you can have access to a song I embedded in the code and a Robin chirp at the end of the countdown. You can disable the song at any time at the graphical interface or you can launch with option --no_song. As I started writing this code by April 25, 2020, the only song that can be played is "Bella Ciao". Soon there will be more embedded songs and the ability to add your own songs.
 
+As of the moment, the code is tested using:
+   - MacOSX Catalina
+   - Python 3.7 (Anaconda Python)
+   - pygame (installed using pip).
+
 Francisco Ortega Culaciati
 ortega.francisco@uchile.cl
 Department of Geophysics
