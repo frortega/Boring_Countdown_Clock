@@ -20,7 +20,7 @@ import datetime
 
 # Set default timer values
 defHH = 0
-defMM = 15
+defMM = 10
 defSS = 0
 
 
@@ -212,7 +212,8 @@ def button_action():
     if not countdown.started:
         countdown.start()
         start_button.config(text = 'EXIT', command = root.destroy)
-        music_button['state'] = tk.NORMAL
+        if countdown.play_song_bool:
+            music_button['state'] = tk.NORMAL
         Hplus['state'] = tk.DISABLED
         Hminus['state'] = tk.DISABLED
         Mplus['state'] = tk.DISABLED
@@ -278,10 +279,11 @@ if __name__ == '__main__':
                                 play_song = args.play_song)
     start_button = tk.Button(root, text='START', command=button_action)
     start_button.pack(side = tk.BOTTOM)
-    if args.play_song:
-        music_button = tk.Button(root, text='TURN MUSIC OFF', command=button_song)
-        music_button.pack(side = tk.RIGHT)
-        music_button['state'] = tk.DISABLED
+    
+    music_button = tk.Button(root, text='TURN MUSIC OFF', command=button_song)
+    music_button.pack(side = tk.RIGHT)
+    music_button['state'] = tk.DISABLED
+
     # buttons to setup time
     Hplus = tk.Button(root, text='+H', command=button_add_hour)
     Hplus.pack(side = tk.LEFT)
@@ -297,5 +299,6 @@ if __name__ == '__main__':
     Splus.pack(side = tk.LEFT)
     Sminus = tk.Button(root, text='-S', command=button_remove_second)
     Sminus.pack(side = tk.LEFT)
+
     tictoc()
     root.mainloop()
