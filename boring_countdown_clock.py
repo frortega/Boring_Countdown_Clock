@@ -18,6 +18,12 @@ else:
 
 import datetime
 
+# Set default timer values
+defHH = 0
+defMM = 15
+defSS = 0
+
+
 class countdown_timer(object):
     def __init__(self, HH, MM, SS, song_filename = 'tunes/during.ogg',
                  finish_sound_filename = 'tunes/finish.ogg',
@@ -221,13 +227,14 @@ def button_song():
 if __name__ == '__main__':
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='A basic and boring countdown clock.')
-    parser.add_argument('-H', action = 'store', default = 0, type = int, required = False,
+    parser.add_argument('-H', action = 'store', default = defHH, type = int, 
+                        required = False,
                         dest = 'hours', help='define hours for countdown (default: 0)')
-    parser.add_argument('-M', action = 'store', default = 10, type = int, 
+    parser.add_argument('-M', action = 'store', default = defMM, type = int, 
                         required = False, dest = 'minutes', 
                         help='define minutes for countdown (default: 10 or 0 if -S is given)')
-    parser.add_argument('-S', action = 'store', default = 0, type = int, required = False,
-                        dest = 'seconds', 
+    parser.add_argument('-S', action = 'store', default = defSS, type = int, 
+                        required = False, dest = 'seconds', 
                         help='define seconds for countdown (default: 0)')
     parser.add_argument('--tcolor', action = 'store', default = 'white', type = str, 
                         required = False, dest = 'text_color',
