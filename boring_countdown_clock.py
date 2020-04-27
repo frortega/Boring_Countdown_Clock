@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env pythonw
 """
 Prof. Francisco Hernan Ortega Culaciati
 ortega.francisco@uchile.cl
@@ -41,6 +41,42 @@ class countdown_timer(object):
         self.updated = True
         self.started = False
         self.finished = False
+
+    def add_hour(self):
+        if not self.started:
+            self.remaining_time['hours'] += 1
+            self.total_time = datetime.timedelta(**self.remaining_time)
+            self.set_remaining_time_str()
+
+    def remove_hour(self):
+        if not self.started and self.remaining_time['hours'] > 0:
+            self.remaining_time['hours'] -= 1
+            self.total_time = datetime.timedelta(**self.remaining_time)
+            self.set_remaining_time_str()
+
+    def add_minute(self):
+        if not self.started and self.remaining_time['minutes'] < 59:
+            self.remaining_time['minutes'] += 1
+            self.total_time = datetime.timedelta(**self.remaining_time)
+            self.set_remaining_time_str()
+    
+    def remove_minute(self):
+        if not self.started and self.remaining_time['minutes'] > 0:
+            self.remaining_time['minutes'] -= 1
+            self.total_time = datetime.timedelta(**self.remaining_time)
+            self.set_remaining_time_str()
+
+    def add_second(self):
+        if not self.started and self.remaining_time['seconds'] < 59:
+            self.remaining_time['seconds'] += 1
+            self.total_time = datetime.timedelta(**self.remaining_time)
+            self.set_remaining_time_str()
+    
+    def remove_second(self):
+        if not self.started and self.remaining_time['seconds'] > 0:
+            self.remaining_time['seconds'] -= 1
+            self.total_time = datetime.timedelta(**self.remaining_time)
+            self.set_remaining_time_str()
 
     def start(self):
         if not self.started:
@@ -138,6 +174,36 @@ def tictoc():
         countdown.stop_song()
         countdown.play_finish()
 
+def button_add_hour():
+    countdown.add_hour()
+    time_str = countdown.remaining_time_str
+    clock.config(text=time_str)
+
+def button_remove_hour():
+    countdown.remove_hour()
+    time_str = countdown.remaining_time_str
+    clock.config(text=time_str)
+
+def button_add_minute():
+    countdown.add_minute()
+    time_str = countdown.remaining_time_str
+    clock.config(text=time_str)
+
+def button_remove_minute():
+    countdown.remove_minute()
+    time_str = countdown.remaining_time_str
+    clock.config(text=time_str)
+
+def button_add_second():
+    countdown.add_second()
+    time_str = countdown.remaining_time_str
+    clock.config(text=time_str)
+
+def button_remove_second():
+    countdown.remove_second()
+    time_str = countdown.remaining_time_str
+    clock.config(text=time_str)
+
 def button_action():
     if not countdown.started:
         countdown.start()
@@ -194,13 +260,28 @@ if __name__ == '__main__':
     root.title("Boring Countdown Clock (http://www.github.com/frortega)")
     font = (args.font, args.font_size, args.font_style)
     clock = tk.Label(root, font= font, bg=args.background_color, fg=args.text_color)
-    clock.pack(fill='both', expand=100)
+    clock.pack(fill='both', expand=100, side = tk.TOP)
     countdown = countdown_timer(args.hours, args.minutes, args.seconds,
                                 play_song = args.play_song)
     start_button = tk.Button(root, text='START', command=button_action)
-    start_button.pack()
+    start_button.pack(side = tk.BOTTOM)
     if args.play_song:
         music_button = tk.Button(root, text='TURN MUSIC OFF', command=button_song)
-        music_button.pack()
+        music_button.pack(side = tk.RIGHT)
+    # buttons to setup time
+    Hplus = tk.Button(root, text='+H', command=button_add_hour)
+    Hplus.pack(side = tk.LEFT)
+    Hminus = tk.Button(root, text='-H', command=button_remove_hour)
+    Hminus.pack(side = tk.LEFT)
+
+    Mplus = tk.Button(root, text='+M', command=button_add_minute)
+    Mplus.pack(side = tk.LEFT)
+    Mminus = tk.Button(root, text='-M', command=button_remove_minute)
+    Mminus.pack(side = tk.LEFT)
+    
+    Splus = tk.Button(root, text='+S', command=button_add_second)
+    Splus.pack(side = tk.LEFT)
+    Sminus = tk.Button(root, text='-S', command=button_remove_second)
+    Sminus.pack(side = tk.LEFT)
     tictoc()
     root.mainloop()
