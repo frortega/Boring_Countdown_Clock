@@ -2,6 +2,7 @@
 """
 Prof. Francisco Hernan Ortega Culaciati
 ortega.francisco@uchile.cl
+frortega@gmail.com
 Departamento de Geofisica - FCFM
 Universidad de Chile
 
