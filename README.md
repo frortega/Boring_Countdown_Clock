@@ -16,4 +16,4 @@ As of the moment, the code is tested using:
 
 Francisco Ortega Culaciati - Department of Geophysics - FCFM - University of Chile
 
-
+[![DOI](https://zenodo.org/badge/258904833.svg)](https://zenodo.org/badge/latestdoi/258904833)
