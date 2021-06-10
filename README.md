@@ -14,6 +14,5 @@ As of the moment, the code is tested using:
    - Python 3.8 (Anaconda Python)
    - pygame (installed using latest version of pip).
 
-Francisco Ortega Culaciati - Department of Geophysics - FCFM - University of Chile
+Francisco Ortega Culaciati - Departmento de Geofisica - FCFM - Universidad de Chile
 
-[![DOI](https://zenodo.org/badge/4922287.svg)](https://doi.org/10.5281/zenodo.4922287)
